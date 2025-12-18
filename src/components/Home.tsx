@@ -3,6 +3,7 @@ import {MyContext} from "../context/ProductContextProvider.tsx";
 import axios from "axios";
 import SearchTopBar from "./SearchTopBar.tsx";
 import SearchLeftSideBar from "./SearchLeftSideBar.tsx";
+import {useNavigate} from "react-router-dom";
 
 let Home=()=>{
 
@@ -12,7 +13,11 @@ let Home=()=>{
             searchedProducts,
             paginatedProducts,
             setPaginatedProducts,
-            setSearchedProducts} = useContext(MyContext)
+            setSearchedProducts,
+            setSelectedItem,
+
+
+        } = useContext(MyContext)
 
     useEffect(()=>{
 
@@ -28,6 +33,14 @@ let Home=()=>{
 
     },[])
 
+
+     let navigate= useNavigate()
+
+    let productClick=(product)=>{
+
+            setSelectedItem(product)
+            navigate('/detail')
+    }
 
     return (
 
@@ -49,7 +62,7 @@ let Home=()=>{
                                             {
                                                 searchedProducts.map((product)=>
 
-                                                    <div key={product.id} className="rounded-3xl shadow-md text-center flex flex-col items-center p-10">
+                                                    <div key={product.id} className="rounded-3xl shadow-md text-center flex flex-col items-center p-10 cursor-pointer hover:shadow-2xl" onClick={()=>productClick(product)}>
 
                                                         <img src={product.thumbnail} alt=""/><br/>
                                                         <h2 className='text-2xl'>{product.title}</h2>

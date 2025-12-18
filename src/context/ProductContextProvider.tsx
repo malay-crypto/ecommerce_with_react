@@ -17,6 +17,7 @@ let ProductContextProvider=({children}) => {
     let[selectedCategories, setSelectedCategories]=useState([])
     let [maxPrice, setMaxPrice] = useState(600)
 
+    let [selectedItem, setSelectedItem]=useState('')
 
 
     useEffect(() => {
@@ -57,6 +58,8 @@ let ProductContextProvider=({children}) => {
                 selectedCategories,
                 maxPrice,
                 setMaxPrice,
+                setSelectedItem,
+                selectedItem,
 
             }}>
                 {children}
