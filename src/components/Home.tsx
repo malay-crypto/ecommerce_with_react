@@ -7,8 +7,11 @@ import SearchLeftSideBar from "./SearchLeftSideBar.tsx";
 let Home=()=>{
 
 
-        let {allProducts, setAllProducts,searchedProducts,
-            paginatedProducts, setPaginatedProducts,
+        let {allProducts,
+            setAllProducts,
+            searchedProducts,
+            paginatedProducts,
+            setPaginatedProducts,
             setSearchedProducts} = useContext(MyContext)
 
     useEffect(()=>{
@@ -31,8 +34,11 @@ let Home=()=>{
 
         <>
 
-            <div className="flex pt-28">
-                <SearchLeftSideBar/>
+            <div className="flex pt-28 items-start">
+                <div className="sticky top-28 ">
+                    <SearchLeftSideBar/>
+                </div>
+
 
                         <div className="p-8 flex flex-col">
                             <SearchTopBar/>
