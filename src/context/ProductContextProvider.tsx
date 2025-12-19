@@ -23,7 +23,7 @@ let ProductContextProvider=({children}) => {
 
     let [pageIndex, setPageIndex]=useState(0)
 
-    let [cart, setCart]=useState([])
+    let [cart, setCart]=useState(localStorage.getItem('cart')?JSON.parse(localStorage.getItem("cart")) :[])
 
     useEffect(() => {
         let filtered = [...allProducts];
@@ -50,14 +50,17 @@ let ProductContextProvider=({children}) => {
        let addToCart=(product)=>{
 
            let r=cart.find(p=>p.id === product.id)
+           let s=''
            if(r){
-              let s=cart.map((p)=>p.id===product.id?{...p,quantity:p.quantity+1}:p)
+               s=cart.map((p)=>p.id===product.id?{...p,quantity:p.quantity+1}:p)
                setCart(s)
            }
            else{
-               let s=[...cart,{...product,quantity:1}];
+                s=[...cart,{...product,quantity:1}];
                setCart(s)
            }
+
+           localStorage.setItem("cart",JSON.stringify(s))
 
        }
 

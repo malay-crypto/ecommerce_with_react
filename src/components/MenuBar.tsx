@@ -1,51 +1,77 @@
-import {Link, useNavigate} from "react-router-dom";
-import Home from "./Home.tsx";
-import {ShoppingCart} from "lucide-react";
-import {useContext} from "react";
-import {MyContext} from "../context/ProductContextProvider.tsx";
+import { Link, useNavigate } from "react-router-dom";
+import { ShoppingCart, Menu } from "lucide-react";
+import { useContext, useState } from "react";
+import { MyContext } from "../context/ProductContextProvider.tsx";
 
-let MenuBar=()=>{
+let MenuBar = () => {
 
-     let navigate= useNavigate()
+    const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
 
-    let {allProducts,
-        setAllProducts,
-        searchedProducts,
-        paginatedProducts,
-        setPaginatedProducts,
-        setSearchedProducts,
-        setSelectedItem,
-        addToCart,
-        totalQty
+    const { totalQty } = useContext(MyContext);
 
-
-    } = useContext(MyContext)
-
-
-    return(
-
-
+    return (
         <>
+            <div className="fixed top-0 left-0 right-0 z-50 bg-amber-950 text-white shadow-2xl">
 
-        <div className='flex h-25 bg-amber-950 text-white justify-between items-center px-8  shadow-2xl fixed top-0 left-0 right-0 mb-14'>
+                <div className="flex items-center justify-between px-4 py-3 lg:px-8">
 
-            <h1 className='text-4xl font-bold'>E Commerce App</h1>
+                    {/* LOGO */}
+                    <h1 className="text-xl lg:text-3xl font-bold">
+                        E Commerce App
+                    </h1>
 
-            <div className='flex items-center justify-between space-x-5'>
-                <h2 className='font-bold text-2xl'><Link to='/'>Home</Link></h2>
-               ({totalQty}) <ShoppingCart className='cursor-pointer text-4xl' onClick={()=>navigate('/cart')} />
+                    {/* DESKTOP MENU */}
+                    <div className="hidden lg:flex items-center gap-6">
+                        <Link to="/" className="text-lg font-semibold">Home</Link>
 
+                        <div
+                            className="flex items-center gap-1 cursor-pointer"
+                            onClick={() => navigate("/cart")}
+                        >
+                            <ShoppingCart />
+                            <span className="font-bold">({totalQty})</span>
+                        </div>
+                    </div>
+
+                    {/* MOBILE MENU ICON */}
+                    <div className="lg:hidden">
+                        <Menu
+                            className="cursor-pointer"
+                            onClick={() => setOpen(!open)}
+                        />
+                    </div>
+                </div>
+
+                {/* MOBILE DROPDOWN */}
+                {open && (
+                    <div className="lg:hidden flex flex-col gap-3 px-4 pb-4">
+                        <Link
+                            to="/"
+                            className="font-semibold"
+                            onClick={() => setOpen(false)}
+                        >
+                            Home
+                        </Link>
+
+                        <div
+                            className="flex items-center gap-1 cursor-pointer"
+                            onClick={() => {
+                                navigate("/cart");
+                                setOpen(false);
+                            }}
+                        >
+                            <ShoppingCart />
+                            <span className="font-bold">({totalQty})</span>
+                        </div>
+                    </div>
+                )}
             </div>
-        </div>
 
+            {/* PAGE OFFSET FOR FIXED NAVBAR */}
+            <div className="h-16 lg:h-20"></div>
         </>
-
-
-    )
-
-
-
-
-}
+    );
+};
 
 export default MenuBar;

@@ -32,7 +32,7 @@ let ProductDetail = ( ) => {
             <div className="flex flex-col justify-center items-center w-screen h-screen ">
 
                 <div className="flex items-start pt-34 ">
-                    <div className='sticky top-34'>
+                    <div className='sticky top-34 flex flex-col'>
                         <img src={selectedItem.thumbnail} alt=""/>
                         <button className='px-4 py-2 bg-amber-500 text-xl cursor-pointer rounded-3xl hover:shadow-2xl' onClick={addToCartButtonclick}>Add to Cart</button>
 
