@@ -33,7 +33,7 @@ let CartPage=()=>{
 
                 cart.length>0?
 
-                    <div className="max-w-7xl mx-auto p-6 grid grid-cols-12 gap-6">
+                    <div className="max-w-7xl mx-auto p-6 flex flex-col gap-2  lg:grid lg:grid-cols-12 lg:gap-6">
 
 
 
@@ -47,7 +47,7 @@ let CartPage=()=>{
                                 {cart.map(item => (
                                     <div
                                         key={item.id}
-                                        className="grid grid-cols-12 gap-4 py-4 items-center"
+                                        className="flex flex-col gap-2  lg:grid lg:grid-cols-12 lg:gap-4 py-4 items-center"
                                     >
                                         {/* Image */}
                                         <div className="col-span-3">

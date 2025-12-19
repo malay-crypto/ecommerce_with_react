@@ -37,6 +37,7 @@ https://dummyjson.com/products
 ________________________________________
 6️⃣ Screenshots 
 ![img_3.png](img_3.png)
+![img_4.png](img_4.png)
 ________________________________________
 7️⃣ Live Demo 
 
