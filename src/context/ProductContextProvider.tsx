@@ -18,7 +18,11 @@ let ProductContextProvider=({children}) => {
     let [maxPrice, setMaxPrice] = useState(600)
 
     let [selectedItem, setSelectedItem]=useState('')
+    let [totalQty, setTotalQty]=useState(0)
+    let [totalPrice, setTotalPrice]=useState(0)
 
+
+    let [cart, setCart]=useState([])
 
     useEffect(() => {
         let filtered = [...allProducts];
@@ -42,6 +46,48 @@ let ProductContextProvider=({children}) => {
     }, [allProducts, searchText, selectedCategories, maxPrice]);
 
 
+       let addToCart=(product)=>{
+
+           let r=cart.find(p=>p.id === product.id)
+           if(r){
+              let s=cart.map((p)=>p.id===product.id?{...p,quantity:p.quantity+1}:p)
+               setCart(s)
+           }
+           else{
+               let s=[...cart,{...product,quantity:1}];
+               setCart(s)
+           }
+
+       }
+
+       let increaseQty=(id)=>{
+
+           let r=cart.map((p)=>p.id===id?{...p,quantity:p.quantity+1}:p)
+           setCart(r)
+
+       }
+    let decreaseQty=(id)=>{
+        let r=cart.map((p)=>p.id===id?{...p,quantity:p.quantity-1}:p)
+        r=r.filter(p=>p.quantity>0)
+        setCart(r)
+    }
+
+
+    let findTotalQty=()=>{
+           let r=cart.reduce((acc,cur)=>acc+cur.quantity,0)
+        setTotalQty(r)
+    }
+
+    let findTotalPrice=()=>{
+        let r=cart.reduce((acc,cur)=>acc+cur.quantity*cur.price,0)
+        setTotalPrice(r.toFixed(2))
+    }
+
+    useEffect(() => {
+        findTotalQty()
+        findTotalPrice()
+    }, [cart]);
+
     return (
 
         <>
@@ -60,6 +106,15 @@ let ProductContextProvider=({children}) => {
                 setMaxPrice,
                 setSelectedItem,
                 selectedItem,
+                addToCart,
+                cart,
+                totalQty,
+                setTotalQty,
+                totalPrice,
+                setTotalPrice,
+                increaseQty,
+                decreaseQty,
+                findTotalQty,
 
             }}>
                 {children}

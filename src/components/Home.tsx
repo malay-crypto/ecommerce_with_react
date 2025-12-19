@@ -15,6 +15,7 @@ let Home=()=>{
             setPaginatedProducts,
             setSearchedProducts,
             setSelectedItem,
+            addToCart,
 
 
         } = useContext(MyContext)
@@ -42,6 +43,12 @@ let Home=()=>{
             navigate('/detail')
     }
 
+    let addToCartButtonclick=(e,product)=>{
+            e.stopPropagation()
+            addToCart(product)
+        console.log('product added : ',product)
+    }
+
     return (
 
 
@@ -67,7 +74,7 @@ let Home=()=>{
                                                         <img src={product.thumbnail} alt=""/><br/>
                                                         <h2 className='text-2xl'>{product.title}</h2>
                                                         <h2 className='text-xl'>${product.price}</h2>
-
+                                                        <button className='px-4 py-2 bg-amber-500 text-xl cursor-pointer rounded-3xl hover:shadow-2xl' onClick={(e)=>addToCartButtonclick(e,product)}>Add to Cart</button>
 
                                                     </div>
 
