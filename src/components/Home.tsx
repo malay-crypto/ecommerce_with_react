@@ -18,12 +18,21 @@ let Home=()=>{
             addToCart,
             pageIndex,
             setPageIndex,
+            setSelectedCategories,
+            setMaxPrice,
+            setSearchText
 
 
         } = useContext(MyContext)
 
     useEffect(()=>{
 
+        setSelectedCategories([]);
+        setMaxPrice(600);
+        setSearchText('');
+        setPageIndex(0);
+
+        console.log('home use effect ....')
         let fetchProduct=async ()=>{
              let r=await axios.get('https://dummyjson.com/products')
             console.log(r.data.products)

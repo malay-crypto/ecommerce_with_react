@@ -1,4 +1,5 @@
 import {createContext, useEffect, useState} from "react";
+import axios from "axios";
 
 let MyContext=  createContext()
 export {MyContext}
@@ -25,6 +26,32 @@ let ProductContextProvider=({children}) => {
 
     let [cart, setCart]=useState(localStorage.getItem('cart')?JSON.parse(localStorage.getItem("cart")) :[])
 
+
+    useEffect(()=>{
+
+        console.log('home use effect ....')
+        let fetchProduct=async ()=>{
+            let r=await axios.get('https://dummyjson.com/products')
+            console.log(r.data.products)
+            setAllProducts(r.data.products)
+            // setPaginatedProducts(r.data.products)
+            setSearchedProducts(r.data.products)
+
+
+            //-------------
+
+            let r2=r.data.products.slice(0,4);
+            setPaginatedProducts(r2);
+
+
+
+
+        }
+        fetchProduct();
+
+    },[])
+
+
     useEffect(() => {
         let filtered = [...allProducts];
 
@@ -43,6 +70,7 @@ let ProductContextProvider=({children}) => {
         filtered = filtered.filter(p => p.price <= maxPrice);
 
         setSearchedProducts(filtered);
+        setPaginatedProducts(filtered);
 
     }, [allProducts, searchText, selectedCategories, maxPrice]);
 

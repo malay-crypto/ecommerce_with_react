@@ -8,7 +8,15 @@ let MenuBar = () => {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
-    const { totalQty } = useContext(MyContext);
+    const {
+
+        totalQty,
+        setSelectedCategories,
+        setMaxPrice,
+        setSearchText,
+        setPageIndex
+
+    } = useContext(MyContext);
 
     return (
         <>
@@ -23,7 +31,14 @@ let MenuBar = () => {
 
                     {/* DESKTOP MENU */}
                     <div className="hidden lg:flex items-center gap-6">
-                        <Link to="/" className="text-lg font-semibold">Home</Link>
+                        <Link to="/" className="text-lg font-semibold"
+                              onClick={() => {
+                                  setSelectedCategories([]);
+                                  setMaxPrice(600);
+                                  setSearchText('');
+                                  setPageIndex(0);
+                              }}
+                        >Home</Link>
 
                         <div
                             className="flex items-center gap-1 cursor-pointer"
@@ -62,14 +77,14 @@ let MenuBar = () => {
                             }}
                         >
                             <ShoppingCart />
-                            <span className="font-bold">({totalQty})</span>
+                            <span className="font-bold ">({totalQty})</span>
                         </div>
                     </div>
                 )}
             </div>
 
             {/* PAGE OFFSET FOR FIXED NAVBAR */}
-            <div className="h-16 lg:h-20"></div>
+            {/*<div className="h-16 lg:h-20"></div>*/}
         </>
     );
 };
