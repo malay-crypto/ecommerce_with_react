@@ -12,9 +12,9 @@ let MenuBar = () => {
 
     return (
         <>
-            <div className="fixed top-0 left-0 right-0 z-50 bg-amber-950 text-white shadow-2xl">
+            <div className="fixed top-0 left-0 right-0 z-50 bg-amber-950 text-white shadow-2xl ">
 
-                <div className="flex items-center justify-between px-4 py-3 lg:px-8">
+                <div className="flex items-center justify-between px-4 py-3 lg:px-8 lg:py-8">
 
                     {/* LOGO */}
                     <h1 className="text-xl lg:text-3xl font-bold">
