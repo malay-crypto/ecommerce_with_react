@@ -16,6 +16,8 @@ let Home=()=>{
             setSearchedProducts,
             setSelectedItem,
             addToCart,
+            pageIndex,
+            setPageIndex,
 
 
         } = useContext(MyContext)
@@ -26,8 +28,17 @@ let Home=()=>{
              let r=await axios.get('https://dummyjson.com/products')
             console.log(r.data.products)
             setAllProducts(r.data.products)
-            setPaginatedProducts(r.data.products)
+           // setPaginatedProducts(r.data.products)
             setSearchedProducts(r.data.products)
+
+
+            //-------------
+
+            let r2=r.data.products.slice(0,4);
+            setPaginatedProducts(r2);
+
+
+
 
         }
         fetchProduct();
@@ -49,25 +60,59 @@ let Home=()=>{
         console.log('product added : ',product)
     }
 
+    let nextClick=(e)=>{
+
+
+            if( (pageIndex*4+4)<searchedProducts.length){
+                setPageIndex(prev=>prev+1)
+            }
+
+    }
+
+    let prevClick=(e)=>{
+
+
+        if( pageIndex>0){
+            setPageIndex(prev=>prev-1)
+        }
+
+    }
+
+    useEffect(() => {
+
+        //whenever user searches for an item and click next or prev button , this will run
+        console.log('page index ',pageIndex)
+        console.log('length of search product ',searchedProducts.length)
+        let startIndex=pageIndex*4
+        let endIndex=startIndex+4;
+        let r=searchedProducts.slice(startIndex,endIndex);
+        setPaginatedProducts(r);
+
+    }, [pageIndex, searchedProducts]);
+
     return (
 
 
         <>
 
+            {/*main outer div*/}
             <div className="flex pt-28 items-start">
+
+                {/* left side bar */}
                 <div className="sticky top-28 ">
                     <SearchLeftSideBar/>
                 </div>
 
 
+                        {/*right side */}
                         <div className="p-8 flex flex-col">
                             <SearchTopBar/>
 
-                                    {searchedProducts.length>0?
+                                    {paginatedProducts.length>0?
 
                                         <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-x-4">
                                             {
-                                                searchedProducts.map((product)=>
+                                                paginatedProducts.map((product)=>
 
                                                     <div key={product.id} className="rounded-3xl shadow-md text-center flex flex-col items-center p-10 cursor-pointer hover:shadow-2xl" onClick={()=>productClick(product)}>
 
@@ -86,6 +131,18 @@ let Home=()=>{
                                         :<h1 className='text-blue-700 font-bold text-4xl'>No product found</h1>
                                     }
 
+                                    {/*pagination*/}
+                                    <div className="flex justify-center items-center space-x-5 mt-4">
+                                        <button className='p-2 bg-emerald-300 font-bold cursor-pointer'
+                                                onClick={prevClick} disabled={pageIndex==0}>
+                                            prev
+                                        </button>
+                                        <div>{pageIndex+1}</div>
+                                        <button className='p-2 bg-emerald-300 font-bold cursor-pointer'
+                                                onClick={nextClick} disabled={(pageIndex*4+4)>=searchedProducts.length}>
+                                            next
+                                        </button>
+                                    </div>
                         </div>
 
             </div>

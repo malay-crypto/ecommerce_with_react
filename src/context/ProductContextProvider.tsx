@@ -21,6 +21,7 @@ let ProductContextProvider=({children}) => {
     let [totalQty, setTotalQty]=useState(0)
     let [totalPrice, setTotalPrice]=useState(0)
 
+    let [pageIndex, setPageIndex]=useState(0)
 
     let [cart, setCart]=useState([])
 
@@ -115,6 +116,8 @@ let ProductContextProvider=({children}) => {
                 increaseQty,
                 decreaseQty,
                 findTotalQty,
+                pageIndex,
+                setPageIndex,
 
             }}>
                 {children}

@@ -14,12 +14,17 @@ let SearchTopBar=()=>{
         setSearchedProducts,
         searchText,
         setSearchText,
+        setPageIndex,
 
     } = useContext(MyContext)
 
 
 
-
+    let searchInputBoxClick=(e)=>{
+        setSearchText(e.target.value)
+        //new search begins
+        setPageIndex(0)
+    }
 
     return(
 
@@ -27,7 +32,7 @@ let SearchTopBar=()=>{
           <div className='flex items-center justify-center  p-3 border border-gray-200 rounded-lg shadow-sm hover:shadow-lg'>
 
               <Search />
-              <input type='text' placeholder='Search by name' onChange={(e)=>setSearchText(e.target.value)} />
+              <input type='text' placeholder='Search by name' onChange={searchInputBoxClick} />
 
 
           </div>

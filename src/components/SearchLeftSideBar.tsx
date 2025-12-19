@@ -14,6 +14,7 @@ let SearchLeftSideBar = () => {
         setMaxPrice,
         selectedCategories,
         setSelectedCategories,
+        setPageIndex,
 
 
     } = useContext(MyContext)
@@ -46,6 +47,17 @@ let categoryClick=(e)=>{
         let r=selectedCategories.filter(p=>p!==e.target.value)
         setSelectedCategories(r)
     }
+
+    //new search begins
+    setPageIndex(0)
+
+}
+
+let priceClick=(e)=>{
+
+    setMaxPrice(e.target.value)
+    //new search begins
+    setPageIndex(0)
 }
 
     return (
@@ -71,7 +83,7 @@ let categoryClick=(e)=>{
                     <div className="flex flex-col gap-3">
                         <h3 className='text-xl'>Price Range</h3>
                         <h3>${maxPrice}</h3>
-                        <input type='range' min='1' max='600' onChange={e => setMaxPrice(e.target.value)} value={maxPrice} />
+                        <input type='range' min='1' max='600' onChange={priceClick } value={maxPrice} />
                     </div>
 
 

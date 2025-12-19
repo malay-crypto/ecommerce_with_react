@@ -12,9 +12,17 @@ let ProductDetail = ( ) => {
         setSearchedProducts,
         setSelectedItem,
         selectedItem,
+        addToCart,
 
 
     } = useContext(MyContext)
+
+
+    let addToCartButtonclick=()=>{
+
+        addToCart(selectedItem)
+        console.log('product added : ',selectedItem)
+    }
 
 
     return (
@@ -26,6 +34,8 @@ let ProductDetail = ( ) => {
                 <div className="flex items-start pt-34 ">
                     <div className='sticky top-34'>
                         <img src={selectedItem.thumbnail} alt=""/>
+                        <button className='px-4 py-2 bg-amber-500 text-xl cursor-pointer rounded-3xl hover:shadow-2xl' onClick={addToCartButtonclick}>Add to Cart</button>
+
                     </div>
 
                     <div className="flex flex-col items-center max-w-100 space-y-4 ">
