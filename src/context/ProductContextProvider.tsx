@@ -16,7 +16,7 @@ let ProductContextProvider=({children}) => {
 
     let [searchText, setSearchText]=useState('')
     let[selectedCategories, setSelectedCategories]=useState([])
-    let [maxPrice, setMaxPrice] = useState(600)
+    let [maxPrice, setMaxPrice] = useState(5000)
 
     let [selectedItem, setSelectedItem]=useState('')
     let [totalQty, setTotalQty]=useState(0)
@@ -26,30 +26,11 @@ let ProductContextProvider=({children}) => {
 
     let [cart, setCart]=useState(localStorage.getItem('cart')?JSON.parse(localStorage.getItem("cart")) :[])
 
-
-    useEffect(()=>{
-
-        console.log('home use effect ....')
-        let fetchProduct=async ()=>{
-            let r=await axios.get('https://dummyjson.com/products')
-            console.log(r.data.products)
-            setAllProducts(r.data.products)
-            // setPaginatedProducts(r.data.products)
-            setSearchedProducts(r.data.products)
-
-
-            //-------------
-
-            let r2=r.data.products.slice(0,4);
-            setPaginatedProducts(r2);
+    let [sortBy, setSortBy] = useState('')
+        let [darkMode, setDarkMode]=useState(false)
 
 
 
-
-        }
-        fetchProduct();
-
-    },[])
 
 
     useEffect(() => {
@@ -69,10 +50,32 @@ let ProductContextProvider=({children}) => {
 
         filtered = filtered.filter(p => p.price <= maxPrice);
 
+
+        //  SORT (AFTER FILTERING)
+        if (sortBy === 'price-asc') {
+            filtered.sort((a, b) => a.price - b.price);
+        }
+
+        if (sortBy === 'price-desc') {
+            filtered.sort((a, b) => b.price - a.price);
+        }
+
+        if (sortBy === 'rating-desc') {
+            filtered.sort((a, b) => b.rating - a.rating);
+        }
+
+        if (sortBy === 'rating-asc') {
+            filtered.sort((a, b) => a.rating - b.rating);
+        }
+
+
         setSearchedProducts(filtered);
         setPaginatedProducts(filtered);
+        setPageIndex(0)// reset page on new sort/filter
 
-    }, [allProducts, searchText, selectedCategories, maxPrice]);
+
+
+    }, [allProducts, searchText, selectedCategories, maxPrice,sortBy]);
 
 
        let addToCart=(product)=>{
@@ -149,6 +152,12 @@ let ProductContextProvider=({children}) => {
                 findTotalQty,
                 pageIndex,
                 setPageIndex,
+                sortBy,
+                setSortBy,
+                darkMode,
+                setDarkMode,
+
+
 
             }}>
                 {children}

@@ -38,7 +38,7 @@ let CartPage=()=>{
 
 
                         {/* LEFT SIDE */}
-                        <div className="col-span-12 lg:col-span-8 bg-white p-4 rounded shadow">
+                        <div className="col-span-12 lg:col-span-8  dark:bg-amber-950 dark:text-white bg-white p-4 rounded shadow">
 
 
 
@@ -95,7 +95,7 @@ let CartPage=()=>{
                         </div>
 
                         {/* RIGHT SIDE */}
-                        <div className="col-span-12 lg:col-span-4 bg-white p-4 rounded shadow h-fit">
+                        <div className="col-span-12 lg:col-span-4  dark:bg-amber-950 dark:text-white bg-white p-4 rounded shadow h-fit">
                             <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
 
                             <div className="flex justify-between mb-2">

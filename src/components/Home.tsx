@@ -20,7 +20,9 @@ let Home=()=>{
             setPageIndex,
             setSelectedCategories,
             setMaxPrice,
-            setSearchText
+            setSearchText,
+            sortBy,
+            setSortBy,
 
 
         } = useContext(MyContext)
@@ -28,7 +30,7 @@ let Home=()=>{
     useEffect(()=>{
 
         setSelectedCategories([]);
-        setMaxPrice(600);
+        setMaxPrice(5000);
         setSearchText('');
         setPageIndex(0);
 
@@ -97,7 +99,7 @@ let Home=()=>{
         let r=searchedProducts.slice(startIndex,endIndex);
         setPaginatedProducts(r);
 
-    }, [pageIndex, searchedProducts]);
+    }, [pageIndex, searchedProducts, sortBy]);
 
     return (
 

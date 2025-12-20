@@ -23,7 +23,7 @@ const ProductDetail = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 py-20 px-4">
-            <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6">
+            <div className="max-w-6xl mx-auto bg-white dark:bg-amber-950  rounded-xl shadow-lg p-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
                     {/* LEFT : Product Image */}
@@ -48,7 +48,7 @@ const ProductDetail = () => {
 
                     {/* RIGHT : Product Info */}
                     <div className="flex flex-col space-y-6">
-                        <h1 className="text-3xl font-bold text-gray-800">
+                        <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
                             {selectedItem.title}
                         </h1>
 
@@ -56,7 +56,7 @@ const ProductDetail = () => {
                             ${selectedItem.price}
                         </div>
 
-                        <div className="border-t pt-4 space-y-2 text-lg text-gray-700">
+                        <div className="border-t pt-4 space-y-2 text-lg text-gray-700 dark:text-white">
                             <p><span className="font-semibold">Rating: {selectedItem.rating}</span>
                                 <Rating
                                     initialValue={selectedItem.rating}
@@ -76,7 +76,7 @@ const ProductDetail = () => {
                             <h2 className="text-2xl font-semibold border-b pb-2 mb-4">
                                 About this item
                             </h2>
-                            <p className="text-lg text-gray-600 leading-relaxed">
+                            <p className="text-lg text-gray-600  dark:text-white leading-relaxed">
                                 {selectedItem.description}
                             </p>
                         </div>

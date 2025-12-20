@@ -26,7 +26,7 @@ let SearchLeftSideBar = () => {
 
     useEffect(()=>{
         console.log('search left side bar use effect...')
-console.log(' side bar : all products:', allProducts)
+        console.log(' side bar : all products:', allProducts)
             let r=new Set(allProducts.map(p=>p.category))
 
         r=[...r]
@@ -83,7 +83,7 @@ let priceClick=(e)=>{
                     <div className="flex flex-col gap-3">
                         <h3 className='text-xl'>Price Range</h3>
                         <h3>${maxPrice}</h3>
-                        <input type='range' min='1' max='600' onChange={priceClick } value={maxPrice} />
+                        <input type='range' min='1' max='5000' onChange={priceClick } value={maxPrice} />
                     </div>
 
 

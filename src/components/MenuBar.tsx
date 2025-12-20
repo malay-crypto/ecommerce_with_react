@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingCart, Menu } from "lucide-react";
+import {ShoppingCart, Menu, Sun, Moon} from "lucide-react";
 import { useContext, useState } from "react";
 import { MyContext } from "../context/ProductContextProvider.tsx";
 
@@ -14,7 +14,10 @@ let MenuBar = () => {
         setSelectedCategories,
         setMaxPrice,
         setSearchText,
-        setPageIndex
+        setPageIndex,
+        darkMode,
+        setDarkMode,
+
 
     } = useContext(MyContext);
 
@@ -39,6 +42,8 @@ let MenuBar = () => {
                                   setPageIndex(0);
                               }}
                         >Home</Link>
+
+                        <button className='cursor-pointer'   onClick={()=>setDarkMode(!darkMode)}>{darkMode?<Sun />:<Moon />}</button>
 
                         <div
                             className="flex items-center gap-1 cursor-pointer"
