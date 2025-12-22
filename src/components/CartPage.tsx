@@ -105,7 +105,7 @@ let CartPage=()=>{
 
                             <div className="flex justify-between font-semibold text-lg mb-4">
                                 <span>Total Price</span>
-                                <span>₹{totalPrice}</span>
+                                <span>${totalPrice}</span>
                             </div>
 
                             <button className="w-full bg-yellow-400 hover:bg-yellow-500 py-2 rounded font-semibold">

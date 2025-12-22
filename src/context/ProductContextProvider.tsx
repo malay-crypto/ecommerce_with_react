@@ -29,7 +29,7 @@ let ProductContextProvider=({children}) => {
     let [sortBy, setSortBy] = useState('')
         let [darkMode, setDarkMode]=useState(false)
 
-
+    let [loading, setLoading] = useState(false);
 
 
 
@@ -156,6 +156,8 @@ let ProductContextProvider=({children}) => {
                 setSortBy,
                 darkMode,
                 setDarkMode,
+                loading,
+                setLoading,
 
 
 
